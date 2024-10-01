@@ -1282,6 +1282,12 @@ MonoBehaviour:
   health: 50
   anim: {fileID: 867281386}
   rb: {fileID: 867281388}
+  attackRance: 6
+  player: {fileID: 1756104919}
+  Rock: {fileID: 115806, guid: 40466c5ac40024bbca1e4b144cdf43c2, type: 3}
+  RockSpawnPoint: {fileID: 1420497681}
+  rockWaitTime: 1
+  rockTimer: 0
 --- !u!95 &867281386 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 9555892, guid: c07db661138134f589f46b8510d57c9a, type: 3}
@@ -1530,10 +1536,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 0
-  anim: {fileID: 0}
-  rb: {fileID: 0}
-  velocity: {x: 0, y: 0}
-  movePoints: []
+  anim: {fileID: 1057889934}
+  rb: {fileID: 1057889935}
+  velocity: {x: 1, y: 0}
+  movePoints:
+  - {fileID: 1788458041}
+  - {fileID: 579807530}
+--- !u!95 &1057889934 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 9576784, guid: 3eeab7ca4bdca4ba382826bdc99b4911, type: 3}
+  m_PrefabInstance: {fileID: 341433136}
+  m_PrefabAsset: {fileID: 0}
+--- !u!50 &1057889935 stripped
+Rigidbody2D:
+  m_CorrespondingSourceObject: {fileID: 5099268, guid: 3eeab7ca4bdca4ba382826bdc99b4911, type: 3}
+  m_PrefabInstance: {fileID: 341433136}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1079976557
 PrefabInstance:
   m_ObjectHideFlags: 0

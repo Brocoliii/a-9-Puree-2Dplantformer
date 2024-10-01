@@ -18,12 +18,17 @@ public class Crocodite : Enemy
     }
     private void Update()
     {
+        rockTimer -= Time.deltaTime;
         Behavior();
+        if (rockTimer <0)
+        {
+            rockTimer = rockWaitTime;
+        }
     }
 
     public void Shoot()
     {
-        
+        if(rockTimer < 0)
         Instantiate(Rock,RockSpawnPoint.position , Quaternion.identity);
 
     }
@@ -31,11 +36,12 @@ public class Crocodite : Enemy
     {
         Vector2 direction = player.transform.position - transform.position; //หาทิศทาง
         float distance = direction.magnitude; //ระยะทาง
-
         if (distance < attackRance)
         {
             Shoot();
         }
+
+
 
     }
     
