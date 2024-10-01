@@ -4,22 +4,39 @@ using UnityEngine;
 
 public class Crocodite : Enemy
 {
-    private float attackRance;
-    private Player player;
-
+    [SerializeField] private float attackRance;
+    [SerializeField] private Player player;
+    [SerializeField] private GameObject Rock;
+    [SerializeField] private Transform RockSpawnPoint;
+    [SerializeField] private float rockWaitTime;
+    [SerializeField] private float rockTimer;
     private void Start()
     {
         Initialized(50);
-        Debug.Log("Crododile :" + Health);
+        Debug.Log(Health);
+        
+    }
+    private void Update()
+    {
         Behavior();
     }
 
     public void Shoot()
     {
+        
+        Instantiate(Rock,RockSpawnPoint.position , Quaternion.identity);
 
     }
     public override void Behavior()
     {
-        Debug.Log("Ceodile.behavior");
+        Vector2 direction = player.transform.position - transform.position; //หาทิศทาง
+        float distance = direction.magnitude; //ระยะทาง
+
+        if (distance < attackRance)
+        {
+            Shoot();
+        }
+
     }
+    
 }
