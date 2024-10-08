@@ -5,22 +5,17 @@ using UnityEngine;
 
 public abstract class Weapon : MonoBehaviour
 {
-    public void Initialized (int nDamage)
-    {
-        Damage = nDamage;
-    }
-    public int Damage
-    {
-        get;
-        set;
+    public int Damage;
+    
 
-    }
-    public string Owner;
-    public abstract void OnHitWith();
+    protected string Owner;
+    public abstract void OnHitWith(Character character);
+        
+
     public abstract void Move();
     public int GetShootDirection()
     {
-        return Damage;  
+        return 1;  
     }
 
 }
