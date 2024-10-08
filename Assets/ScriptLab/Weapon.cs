@@ -5,8 +5,10 @@ using UnityEngine;
 
 public abstract class Weapon : MonoBehaviour
 {
-    public int Damage;
-    
+    public int Damage { get; protected set; }
+
+
+
 
     protected string Owner;
     public abstract void OnHitWith(Character character);
