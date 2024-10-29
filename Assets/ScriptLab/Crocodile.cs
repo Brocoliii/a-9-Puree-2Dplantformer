@@ -2,14 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Crocodite : Enemy
+public class Crocodite : Enemy, IShootable
 {
     [SerializeField] private float attackRance;
     [SerializeField] private Player player;
-    [SerializeField] private GameObject Rock;
-    [SerializeField] private Transform RockSpawnPoint;
-    [SerializeField] private float rockWaitTime;
-    [SerializeField] private float rockTimer;
+
+    [field:SerializeField]
+    GameObject rock;
+    public GameObject Rock { get {return rock; } set { rock = value; } }
+    [field: SerializeField]
+    Transform rockSpawnPoint;
+    public Transform RockSpawnPoint { get { return rockSpawnPoint; } set { rockSpawnPoint = value; } }
+    public float rockWaitTime { get; set; }
+    public float rockTimer { get; set; }
     private void Start()
     {
         Initialized(50);
@@ -20,7 +25,7 @@ public class Crocodite : Enemy
     {
         rockTimer -= Time.deltaTime;
         Behavior();
-        if (rockTimer <0)
+        if (rockTimer >= rockWaitTime)
         {
             rockTimer = rockWaitTime;
         }
