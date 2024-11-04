@@ -7,18 +7,18 @@ public class Ant : Enemy
 {
     private void Start()
     {
-        rb = GetComponent <Rigidbody2D>();
+        //rb = GetComponent <Rigidbody2D>();
         Initialized(10);
-        Debug.Log(Health);
+        //Debug.Log(Health);
         
     }
     private void FlipCharater()
     {
-        velocity.x *= -1;
+        velocity *= -1;
 
-        Vector3 charScale = transform.localScale;
-        charScale.x *= -1;
-        transform.localScale = charScale;
+        Vector2 scale = transform.localScale;
+        scale.x *= -1;
+        transform.localScale = scale;
     }
 
 
@@ -32,18 +32,17 @@ public class Ant : Enemy
 
     public override void Behavior()
     {
-        rb.MovePosition(rb.position + velocity * Time.fixedDeltaTime); //ตำแหน่ง + ความเร้ว * เวลา = ระยะทาง
-        if (rb.position.x >= movePoints[1].position.x && velocity.x > 0)
+        rb.MovePosition(rb.position + velocity * Time.fixedDeltaTime);
+        if (rb.position.x <= movePoints[0].position.x && velocity.x < 0)
         {
             FlipCharater();
-            
+
         }
-        
-        else if  (rb.position.x <=  movePoints[0].position.x && velocity.x < 0  )
+        else if (rb.position.x >= movePoints[1].position.x && velocity.x > 0)
         {
-            FlipCharater();    
+            FlipCharater();
         }
-      
+
     }
     
 
