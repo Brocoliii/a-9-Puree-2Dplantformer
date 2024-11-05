@@ -17,7 +17,9 @@ public class Player : Character , IShootable
     {
         if (Input.GetButtonDown("Fire1") && rockWaitTime >= rockTimer)
         {
-            Instantiate(rock, RockSpawnPoint.position, Quaternion.identity);
+            GameObject obj = Instantiate(rock, RockSpawnPoint.position, Quaternion.identity);
+            Banana banana = obj.GetComponent<Banana>();
+            banana.Init(10, this);
         }
         
     }
@@ -33,5 +35,16 @@ public class Player : Character , IShootable
         Shoot();    
     
     }
+    void FixedUpdate()
+    { rockWaitTime += Time.fixedDeltaTime; }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        Enemy enemy = collision.gameObject.GetComponent<Enemy>();
+        if (enemy != null) { OnHitWith(enemy); }
+    }
 
+    public void OnHitWith(Enemy enemy)
+    {
+        TakeDamage(enemy.DamageHit);
+    }    
 }

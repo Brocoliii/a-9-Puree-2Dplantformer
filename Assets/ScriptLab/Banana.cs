@@ -8,21 +8,34 @@ public  class Banana : Weapon
     [SerializeField] private float speed;
     public void Start()
     {
-        Damage = 40;
-        Move();
+        Damage = 10;
+        
+        speed = 3.0f * GetShootDirection();
+        
         
 
 
     }
-    
+    private void FixedUpdate()
+    {
+        Move();
+    }
+
     public override void Move()
     {
-        Debug.Log("Banana เคลื่อนที่ด้วย Transform ด้วยความเร็วคงที่");
+        // Debug.Log("Banana เคลื่อนที่ด้วย Transform ด้วยความเร็วคงที่");
+        float newX = transform.position.x + speed * Time.fixedDeltaTime;
+        float newY = transform.position.y;
+        Vector2 newPosition = new Vector2(newX, newY);
+        transform.position = newPosition;
+        
+        
        
     }
     public override void OnHitWith(Character character)
     {
-
+        if (character is Enemy)
+            character.TakeDamage(this.Damage);
     }
     
 

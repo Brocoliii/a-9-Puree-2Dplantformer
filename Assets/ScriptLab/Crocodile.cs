@@ -19,29 +19,40 @@ public class Crocodite : Enemy, IShootable
     {
         Initialized(50);
         Debug.Log(Health);
+        rockTimer = 0.0f;
+        rockWaitTime = 2.0f;
+        
         
     }
-    private void Update()
+     void FixedUpdate()
     {
         rockTimer -= Time.deltaTime;
         Behavior();
-        if (rockTimer >= rockWaitTime)
-        {
-            rockTimer = rockWaitTime;
-        }
+        //if (rockTimer >= rockWaitTime)
+        //{
+            //ockTimer = rockWaitTime;
+        //}
     }
 
     public void Shoot()
     {
-        if(rockTimer < 0)
-        Instantiate(Rock,RockSpawnPoint.position , Quaternion.identity);
+        if (rockTimer <= 0f)
+        {
+            //Animator.Setrigger("Shoot");
+
+            GameObject obj = Instantiate(Rock, RockSpawnPoint.position, Quaternion.identity);
+            rockTimer = rockWaitTime;
+            Rock rockScript = obj.GetComponent<Rock>();
+            rockScript.Init(20, this);
+            
+         }
+
 
     }
     public override void Behavior()
     {
-        Vector2 direction = player.transform.position - transform.position; //หาทิศทาง
-        float distance = direction.magnitude; //ระยะทาง
-        if (distance < attackRance)
+        Vector2 distance = player.transform.position - transform.position; //หาทิศทาง 
+        if (distance.magnitude < attackRance)
         {
             Shoot();
         }

@@ -40,6 +40,7 @@ public abstract class Character : MonoBehaviour
     {
         Health -= damage;
         IsDead();
+        
     }
 
     
