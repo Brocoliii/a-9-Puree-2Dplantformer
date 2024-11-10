@@ -5,29 +5,34 @@ using UnityEngine;
 
 public abstract class Weapon : MonoBehaviour
 {
-    int damage;
-    public int Damage { get { return damage; } set { damage = value; } }
+    [SerializeField] private int damage;
+    public int Damage 
+    { 
+        get 
+        { 
+            return damage; 
+        } 
+        set 
+        { 
+            damage = value; 
+        } 
+    }
     public IShootable shooter;
-
+    public abstract void OnHitWith(Character character);
+    public abstract void Move();
     public void Init (int _damage, IShootable _owner)
     {
         Damage = _damage;
         shooter = _owner;
     }
-
-
-
-    protected string Owner;
-    public abstract void OnHitWith(Character character);
-        
-
-    public abstract void Move();
+    
+    
     public int GetShootDirection()
     {
-        float shootDir = shooter.RockSpawnPoint.position.x - shooter.RockSpawnPoint.parent.position.x;
-        if (shootDir > 0)
-        return 1;  
-        else return -1;
+        float shootDir = shooter.RockSpawnPoint.position.x - shooter.RockSpawnPoint.position.x;
+        if (shootDir < 0)
+            return -1;
+        else return 1;
     }
     private void OnTriggerEnter2D(Collider2D other)
     {

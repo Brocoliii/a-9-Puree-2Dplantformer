@@ -5,9 +5,16 @@ using UnityEngine;
 public abstract class Character : MonoBehaviour
 
 {
+    public HeartBar heartBar;
+    public Animator anim;
+    public Rigidbody2D rb;
+
     public void Initialized(int newHealth)
     {
         Health = newHealth;
+        heartBar.SetMaxHealth(newHealth);
+        anim = GetComponent<Animator>();
+        rb = GetComponent<Rigidbody2D>();
     }
 
     [SerializeField]private int health;
@@ -23,10 +30,7 @@ public abstract class Character : MonoBehaviour
         }
     }
 
-
-    public Animator anim;
-    public Rigidbody2D rb;
-
+ 
     public bool IsDead()
     {
         if (health <= 0)
@@ -39,6 +43,7 @@ public abstract class Character : MonoBehaviour
     public void TakeDamage(int damage )
     {
         Health -= damage;
+        heartBar.UpdateHealthBar(health);
         IsDead();
         
     }

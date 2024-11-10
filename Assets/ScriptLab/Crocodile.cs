@@ -39,11 +39,12 @@ public class Crocodite : Enemy, IShootable
         if (rockTimer <= 0f)
         {
             //Animator.Setrigger("Shoot");
-
+            anim.SetTrigger("Shoot");
             GameObject obj = Instantiate(Rock, RockSpawnPoint.position, Quaternion.identity);
             rockTimer = rockWaitTime;
             Rock rockScript = obj.GetComponent<Rock>();
             rockScript.Init(20, this);
+            
             
          }
 
@@ -51,8 +52,9 @@ public class Crocodite : Enemy, IShootable
     }
     public override void Behavior()
     {
-        Vector2 distance = player.transform.position - transform.position; //หาทิศทาง 
-        if (distance.magnitude < attackRance)
+        Vector2 direction = player.transform.position - transform.position; //หาทิศทาง 
+        float distance = direction.magnitude;
+        if (distance <= attackRance)
         {
             Shoot();
         }
